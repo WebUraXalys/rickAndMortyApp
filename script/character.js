@@ -3,8 +3,8 @@ const baseUrl = 'https://rickandmortyapi.com/api/character';
 const container = document.querySelector('.cardsBox');
 
 
-function getCharacters(page) {
-   fetch(`${baseUrl}/?page=${page}`)
+function getCharacters(page, gender, status) {
+   fetch(`${baseUrl}/?page=${page}&status=${status}&gender=${gender}`)
       .then(response => response.json())
       .then(data => {
          renderCards(data.results);
@@ -13,7 +13,7 @@ function getCharacters(page) {
 
 }
 
-getCharacters();
+getCharacters(1, '', '');
 
 function renderCards(data) {
    container.innerHTML = '';
@@ -24,7 +24,7 @@ function renderCards(data) {
          <div class="card-body">
             <h5 class="card-title">${cardData.name}</h5>
             <p class="card-text">${cardData.species}</p>
-            <a href="#" class="btn btn-primary">Detailes</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="${cardData.id}">Details</button>
          </div>
          </div>
       `;
@@ -61,16 +61,53 @@ function renderPagination(info){
 
       console.log('next page');
 
-      getCharacters(currentPage);
+      getCharacters(currentPage, '', '');
       
    })
    prevPage.addEventListener('click', () => {
       console.log('previous page');
       if(currentPage > 1){
          currentPage--;
-         getCharacters(currentPage);
+         getCharacters(currentPage, '', '');
       }
       
+
+   })
+}
+
+const btnFilter = document.querySelector('.btnFilter');
+
+btnFilter.addEventListener('click', () => {
+   const gender = document.querySelector('#selectGender').value;
+   const status = document.querySelector('#selectStatus').value;
+   currentPage = 1;
+   console.log(gender, status);
+   if(gender === ''){
+      getCharacters(currentPage, '', status);
+   } else if (status === '') {
+      getCharacters(currentPage, gender, '');
+   } else {
+      getCharacters(currentPage, gender, status);
+   }
+   
+})
+
+const exampleModal = document.getElementById('exampleModal')
+if (exampleModal) {
+   exampleModal.addEventListener('show.bs.modal', event => {
+      const button = event.relatedTarget
+      const modalTitle = exampleModal.querySelector('.modal-title')
+      const id = button.getAttribute('data-bs-whatever')
+
+      
+      fetch(`${baseUrl}/${id}`)
+         .then(response => response.json())
+         .then(data => {
+            console.log(data);
+         })
+
+
+      modalTitle.textContent = `Info about ${id}`
 
    })
 }

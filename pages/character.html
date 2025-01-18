@@ -37,6 +37,30 @@
    </header>
 
    <main class="main d-flex flex-column justify-content-center pt-5">
+      
+      <div class="filtersBox d-flex justify-content-center gap-5">
+         <h1 class="display-5">Filters: </h1>
+         <div class="form-floating">
+            <select class="form-select" id="selectGender" aria-label="Floating label select example">
+               <option selected> </option>
+               <option value="Female">Female</option>
+               <option value="Male">Male</option>
+               <option value="Genderless">Genderless</option>
+               <option value="unknown">unknown</option>
+            </select>
+            <label for="floatingSelect">Gender</label>
+         </div>
+         <div class="form-floating">
+            <select class="form-select" id="selectStatus" aria-label="Floating label select example">
+               <option selected> </option>
+               <option value="Alive">Alive</option>
+               <option value="Dead">Dead</option>
+               <option value="unknown">unknown</option>
+            </select>
+            <label for="floatingSelect">Status</label>
+         </div>
+         <button type="button" class="btn btn-primary btnFilter">Search by filter</button>
+      </div>
       <div class="cardsBox d-flex flex-wrap justify-content-center gap-5 ">
 
       </div>
@@ -49,6 +73,23 @@
          </nav>
       </div>
    </main>
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Info </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
    <script src="./../script/character.js"></script>
