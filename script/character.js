@@ -2,6 +2,10 @@ const baseUrl = 'https://rickandmortyapi.com/api/character';
 
 const container = document.querySelector('.cardsBox');
 
+let currentPage = 1;
+let currentGender = '';
+let currentStatus = '';
+
 
 function getCharacters(page, gender, status) {
    fetch(`${baseUrl}/?page=${page}&status=${status}&gender=${gender}`)
@@ -13,7 +17,7 @@ function getCharacters(page, gender, status) {
 
 }
 
-getCharacters(1, '', '');
+getCharacters(currentPage, currentGender, currentStatus);
 
 function renderCards(data) {
    container.innerHTML = '';
@@ -30,7 +34,6 @@ function renderCards(data) {
       `;
    });
 }
-let currentPage = 1;
 function renderPagination(info){
    
    const paginationBox = document.querySelector('.pagination');
@@ -55,24 +58,23 @@ function renderPagination(info){
    `;
    const prevPage = document.querySelector('.prevPage');
    const nextPage = document.querySelector('.nextPage');
-
-   nextPage.addEventListener('click', () => {
-      currentPage++;
-
-      console.log('next page');
-
-      getCharacters(currentPage, '', '');
-      
-   })
-   prevPage.addEventListener('click', () => {
-      console.log('previous page');
-      if(currentPage > 1){
+   if(info.next == null){
+      nextPage.classList.add('disabled');
+   } else{
+      nextPage.addEventListener('click', () => {
+         currentPage++;
+         getCharacters(currentPage, currentGender, currentStatus);
+      })
+   }
+   if(info.prev == null){
+     prevPage.classList.add('disabled');
+   } else{
+     prevPage.addEventListener('click', () => {
          currentPage--;
-         getCharacters(currentPage, '', '');
-      }
-      
-
-   })
+         getCharacters(currentPage, currentGender, currentStatus);
+     })
+   }
+   
 }
 
 const btnFilter = document.querySelector('.btnFilter');
@@ -80,15 +82,10 @@ const btnFilter = document.querySelector('.btnFilter');
 btnFilter.addEventListener('click', () => {
    const gender = document.querySelector('#selectGender').value;
    const status = document.querySelector('#selectStatus').value;
-   currentPage = 1;
-   console.log(gender, status);
-   if(gender === ''){
-      getCharacters(currentPage, '', status);
-   } else if (status === '') {
-      getCharacters(currentPage, gender, '');
-   } else {
-      getCharacters(currentPage, gender, status);
-   }
+   currentGender = gender;
+   currentStatus = status;
+   currentPage = 1; 
+   getCharacters(currentPage, currentGender, currentStatus);
    
 })
 
