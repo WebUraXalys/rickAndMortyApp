@@ -37,8 +37,33 @@
    </header>
 
    <main class="main d-flex flex-column justify-content-center pt-5">
+      <div class="filtersBox d-flex justify-content-center gap-5">
+         <h1 class="display-5">Filters: </h1>
+         <form class="row g-2">
+            <div class="col-auto form-floating mb-3">
+               
+                  <input type="email" class="form-control" id="floatingInput" placeholder="S01E01">
+                  <label for="floatingInput">Name of episode</label>
+            </div>
+            </form>
+         <button type="button" class="btn btn-primary btnFilter">Search by filter</button>
+      </div>
       
-      
+      <div class="boxWithTable w-75 m-auto">
+         <table class="table table-bordered table-striped table-hover">
+            <thead>
+               <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Air Date</th>
+                  <th scope="col">Episode</th>
+               </tr>
+            </thead>
+            <tbody class="tbody ">
+               
+            </tbody>
+         </table>
+      </div>
          
       <div class="paginationBox d-flex justify-content-center m-5">
          <nav aria-label="Page navigation example">
@@ -49,24 +74,8 @@
       </div>
    </main>
 
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Info </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-         </div>
-      </div>
-   </div>
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-   <script src="./../script/"></script>
+   <script src="./../script/episode.js"></script>
 </body>
 </html>
