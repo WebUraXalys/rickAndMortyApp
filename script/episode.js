@@ -65,14 +65,19 @@ function renderPagination(info) {
    const prevPage = document.querySelector('.prevPage');
    const nextPage = document.querySelector('.nextPage');
 
-   nextPage.addEventListener('click', () => {
-      currentPage++;
+   if (info.next == null){
+      nextPage.classList.add('disabled');
+   } else{
+      nextPage.addEventListener('click', () => {
+         currentPage++;
 
-      console.log('next page');
+         console.log('next page');
 
-      getData(currentPage, currentEpisode);
+         getData(currentPage, currentEpisode);
 
-   })
+      })
+   }
+  
    prevPage.addEventListener('click', () => {
       console.log('previous page');
       if (currentPage > 1) {
