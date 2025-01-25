@@ -5,8 +5,6 @@ const baseUrl = 'https://rickandmortyapi.com/api/episode';
 const tbody = document.querySelector('.tbody');
 
 let currentPage = 1;
-// let currentGender = '';
-// let currentStatus = '';
 let currentEpisode = '';
 
 function getData(page, episode) {
@@ -26,17 +24,17 @@ function renderTable(data) {
    console.log(data);
    
    data.forEach(item =>{
-      console.log(item);
-      
       tbody.innerHTML += `
          <tr>
             <th scope="row">${item.id}</th>
             <td>${item.name}</td>
             <td>${item.air_date}</td>
             <td>${item.episode}</td>
+            <td class="d-flex justify-content-center"><button type="button" class="btn btn-primary" id="btnAdd" data-name="${item.name}" data-episode="${item.episode}">Add</button></td>
          </tr>
       `;
    })
+   addToWatchlist();
    
 }
 
@@ -92,6 +90,27 @@ btnFilter.addEventListener('click', () => {
    console.log(currentEpisode);
    getData(currentPage, currentEpisode);
 
-   
-
 })
+
+function addToWatchlist() {
+   const btnAdds = document.querySelectorAll('#btnAdd');
+   console.log(btnAdds);
+   btnAdds.forEach(btnAdd => {
+      btnAdd.addEventListener('click', () => {
+         const name = btnAdd.getAttribute('data-name');
+         const episode = btnAdd.getAttribute('data-episode');
+         console.log(name);
+         const obj = {
+            name: name,
+            episode: episode,
+            watched: false
+         }
+         localStorage.setItem('name', JSON.stringify(obj));
+      })
+   })
+}
+
+
+
+
+
