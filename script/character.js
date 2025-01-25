@@ -111,32 +111,3 @@ if (exampleModal) {
 
    })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function renderCards(data) {
-
