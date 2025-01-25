@@ -70,23 +70,18 @@ function renderPagination(info) {
    } else{
       nextPage.addEventListener('click', () => {
          currentPage++;
-
-         console.log('next page');
-
          getData(currentPage, currentEpisode);
 
       })
    }
-  
-   prevPage.addEventListener('click', () => {
-      console.log('previous page');
-      if (currentPage > 1) {
+   if (info.prev == null) {
+      prevPage.classList.add('disabled');
+   } else {
+      prevPage.addEventListener('click', () => {
          currentPage--;
          getData(currentPage, currentEpisode);
-      }
-
-
-   })
+      })
+   }
 }
 
 const btnFilter = document.querySelector('.btnFilter');
